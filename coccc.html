@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Moonlight Christmas · M89 Promo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{-webkit-tap-highlight-color:transparent;box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Pyidaungsu',sans-serif;color:white;overflow-x:hidden;min-height:100vh;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;background:#04060f}
+.bg-blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:blob-drift 12s ease-in-out infinite alternate}
+.blob-red{width:320px;height:320px;background:rgba(200,0,50,0.18);top:-80px;left:-60px}
+.blob-blue{width:280px;height:280px;background:rgba(0,80,200,0.15);bottom:200px;right:-80px;animation-delay:-5s}
+.blob-purple{width:200px;height:200px;background:rgba(120,0,200,0.12);top:40%;left:30%;animation-delay:-3s}
+@keyframes blob-drift{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,20px) scale(1.1)}}
+.lux-btn,.bulb,.btn-sweep,.star,.code-sheet,.fixed-btn-bar{will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(0)}
+button,a{touch-action:manipulation;cursor:pointer}
+#admin-dash{-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.light-strand{position:fixed;top:-10px;left:0;width:100%;height:60px;background-image:url('data:image/svg+xml;utf8,<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 25 40 50 10 T 100 10" stroke="white" stroke-opacity="0.08" fill="transparent"/></svg>');background-repeat:repeat-x;z-index:100;pointer-events:none}
+.bulb-container{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-around;z-index:101;pointer-events:none}
+.bulb{width:9px;height:13px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:blink 1.5s infinite alternate}
+@keyframes blink{from{opacity:0.3;filter:brightness(0.6) drop-shadow(0 0 1px currentColor)}to{opacity:1;filter:brightness(1.4) drop-shadow(0 0 8px currentColor)}}
+#moon{position:fixed;top:28px;right:28px;width:52px;height:52px;background:radial-gradient(circle at 35% 35%,#fff,#e8e0c0);border-radius:50%;z-index:200;cursor:pointer;pointer-events:all;box-shadow:0 0 0 1px rgba(255,255,255,0.15),0 0 30px rgba(255,255,220,0.35);animation:moon-glow 5s ease-in-out infinite alternate;transition:background .3s,box-shadow .3s}
+@keyframes moon-glow{from{transform:translateZ(0) scale(1)}to{transform:translateZ(0) scale(1.07)}}
+.star{position:fixed;border-radius:50%;pointer-events:none;animation:move-star linear infinite}
+@keyframes move-star{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-100vh,0)}}
+#offline-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1a0000,#3d0000);border-bottom:1px solid rgba(255,60,60,0.3);padding:11px 20px;text-align:center;font-size:11px;font-weight:700;color:#ff8080;transform:translateY(-100%);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1)}
+#offline-banner.show{transform:translateY(0)}
+.skel{background:linear-gradient(90deg,rgba(255,255,255,0.03) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.03) 75%);background-size:200% auto;animation:skel-shimmer 1.5s linear infinite;border-radius:inherit}
+@keyframes skel-shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+.hero-label{display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,60,0.1);border:1px solid rgba(255,0,60,0.25);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ff4060;text-shadow:0 0 12px rgba(255,0,60,0.6)}
+.hero-label-dot{width:6px;height:6px;background:#ff2040;border-radius:50%;animation:dot-pulse 1.2s ease-in-out infinite}
+@keyframes dot-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+.hero-title{font-size:clamp(28px,8vw,46px);font-weight:900;letter-spacing:-.02em;line-height:1.1;background:linear-gradient(135deg,#fff 0%,#e0e0ff 40%,#fff 70%,#ffe090 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:title-shimmer 4s linear infinite}
+@keyframes title-shimmer{0%{background-position:0% center}100%{background-position:200% center}}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7}
+.hero-sub b{color:rgba(255,255,255,.8);font-weight:700}
+.stats-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:1.4rem;padding:14px 10px}
+.stat-item{text-align:center}
+.stat-val{font-size:18px;font-weight:900;background:linear-gradient(135deg,#fff,#ffe090);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:3px}
+.stat-key{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.fixed-btn-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:10px 12px max(18px,env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(4,6,15,1) 60%,rgba(4,6,15,.8) 85%,transparent)}
+.btn-stack{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:7px}
+.lux-btn{position:relative;border:none;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:16px;padding:0 20px;height:54px;width:100%;transition:transform .1s ease,filter .1s ease}
+.lux-btn:active{transform:scale(0.96);filter:brightness(1.12)}
+.lux-btn::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.14),transparent);border-radius:16px 16px 0 0;pointer-events:none;z-index:1}
+.lux-btn::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:1px;background:rgba(255,255,255,.2);pointer-events:none;z-index:1}
+.btn-sweep{position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:skewX(-18deg);pointer-events:none;z-index:2;animation:sweep 3s ease-in-out infinite}
+@keyframes sweep{0%{left:-120%}40%,100%{left:160%}}
+.btn-glow{position:absolute;inset:-6px;border-radius:22px;pointer-events:none;z-index:0;animation:glow-pulse 2.8s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{opacity:.22}50%{opacity:.75}}
+.btn-gift{background:linear-gradient(120deg,#5c000e,#b8001f,#e8002a,#ff3355);box-shadow:0 6px 28px rgba(200,0,40,.45),inset 0 1px 0 rgba(255,255,255,.1)}
+.btn-gift .btn-glow{background:radial-gradient(ellipse,rgba(255,30,70,.65) 0%,transparent 65%)}
+.btn-9w{background:linear-gradient(120deg,#1f0c00,#8c3d00,#d45f00,#ff7c00,#ffaa33);box-shadow:0 6px 28px rgba(200,100,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-9w .btn-glow{background:radial-gradient(ellipse,rgba(255,130,0,.6) 0%,transparent 65%);animation-delay:.5s}
+.btn-m799{background:linear-gradient(120deg,#160030,#6200bb,#9c2ef0,#c060ff,#da90ff);box-shadow:0 6px 28px rgba(150,0,240,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-m799 .btn-glow{background:radial-gradient(ellipse,rgba(180,60,255,.6) 0%,transparent 65%);animation-delay:1s}
+.btn-m89{background:linear-gradient(120deg,#001535,#003fa8,#0070e0,#20a0ff,#70ccff);box-shadow:0 6px 28px rgba(0,100,220,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-m89 .btn-glow{background:radial-gradient(ellipse,rgba(0,140,255,.6) 0%,transparent 65%);animation-delay:1.5s}
+.btn-icon{font-size:20px;line-height:1;position:relative;z-index:3;flex-shrink:0}
+.btn-label{font-family:'Pyidaungsu',sans-serif;font-size:13.5px;font-weight:900;position:relative;z-index:3;flex:1;text-align:center;background:linear-gradient(90deg,#c8c8d8,#fff 25%,#fff5c8 55%,#fff 75%,#c8c8d8);background-size:250% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:label-shimmer 2.6s linear infinite}
+@keyframes label-shimmer{0%{background-position:0% center}100%{background-position:250% center}}
+.btn-label-gift{font-size:15px}
+.social-pill{position:relative;z-index:3;flex-shrink:0;font-size:8.5px;font-weight:700;color:rgba(255,255,255,.7);background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:3px 8px;white-space:nowrap}
+#code-modal{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);align-items:flex-end;justify-content:center;padding:16px 14px 240px}
+.code-sheet{width:100%;max-width:460px;background:linear-gradient(145deg,rgba(18,0,40,.98),rgba(6,0,20,.99));border:1px solid rgba(140,60,255,.25);border-radius:2rem;padding:28px 22px 22px;text-align:center;box-shadow:0 0 80px rgba(100,20,220,.25),inset 0 1px 0 rgba(255,255,255,.06);animation:sheet-up .4s cubic-bezier(0.34,1.56,0.64,1);position:relative}
+@keyframes sheet-up{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.code-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.06);border:none;color:rgba(255,255,255,.35);width:32px;height:32px;border-radius:50%;font-size:14px;display:flex;align-items:center;justify-content:center}
+.code-close:active{transform:scale(.88)}
+.code-tag{font-size:9px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px}
+#code-disp{font-size:clamp(24px,7.5vw,38px);font-weight:900;letter-spacing:.14em;background:linear-gradient(135deg,#fff 20%,#d090ff 60%,#fff 90%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:label-shimmer 2.2s linear infinite;margin:12px 0 20px;min-height:48px}
+.copy-btn{width:100%;padding:15px;border:none;border-radius:1rem;cursor:pointer;background:linear-gradient(135deg,#6200bb,#9c2ef0,#b84fff);font-family:'Pyidaungsu',sans-serif;font-size:13.5px;font-weight:900;color:white;box-shadow:0 6px 28px rgba(100,0,200,.45)}
+.copy-btn:active{transform:scale(.97)}
+#copy-countdown{font-size:11px;color:rgba(255,255,255,.5);margin-left:6px;font-variant-numeric:tabular-nums}
+#login-modal{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:24px}
+#login-modal.show{display:flex}
+.login-card{background:white;color:#1a1a2e;padding:32px 28px;border-radius:2rem;width:100%;max-width:300px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+#admin-dash{position:fixed;inset:0;z-index:3000;background:#f4f6fb;color:#1a1a2e;display:none;overflow-y:auto}
+.admin-header{position:sticky;top:0;z-index:10;background:rgba(244,246,251,.95);backdrop-filter:blur(8px);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e4e8f0}
+.admin-body{padding:16px 16px 80px;max-width:500px;margin:0 auto}
+.admin-card{background:white;border-radius:1.4rem;padding:18px;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #edf0f7}
+.admin-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ba8c0;margin-bottom:10px;display:block}
+.admin-input{width:100%;padding:12px 14px;background:#f7f9fc;border:1px solid #e4e8f0;border-radius:12px;font-family:'Pyidaungsu',sans-serif;font-size:13px;color:#1a1a2e;outline:none;transition:border-color .2s}
+.admin-input:focus{border-color:#9c2ef0}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.s-card{background:linear-gradient(135deg,#f8f9ff,#f0f3ff);border:1px solid #e4eaff;border-radius:1rem;padding:12px;text-align:center}
+.s-num{font-size:22px;font-weight:900;color:#1a1a2e;line-height:1;margin-bottom:2px}
+.s-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ba8c0}
+.s-rate{font-size:10px;font-weight:700;margin-top:3px}
+.rate-g{color:#00aa44}.rate-m{color:#ff8800}
+.funnel-bar{background:#eaedff;border-radius:6px;height:5px;overflow:hidden;margin-top:5px}
+.funnel-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#6200bb,#9c2ef0);transition:width .8s ease}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fu1{animation:fade-up .5s .05s both ease-out}
+.fu2{animation:fade-up .5s .15s both ease-out}
+.fu3{animation:fade-up .5s .25s both ease-out}
+.fu4{animation:fade-up .5s .35s both ease-out}
+#toast{position:fixed;bottom:300px;left:50%;transform:translateX(-50%);background:rgba(10,10,30,.95);border:1px solid rgba(255,255,255,.1);color:white;padding:10px 20px;border-radius:99px;font-size:12px;font-weight:700;display:none;z-index:5000;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+</style>
+</head>
+<body>
+<div id="offline-banner">⚠️ အင်တာနက် ချိတ်ဆက်မှု မရှိပါ</div>
+<div class="light-strand"></div>
+<div class="bulb-container" id="bulb-box"></div>
+<div id="moon" onclick="moonTap()"></div>
+<div class="bg-blob blob-red"></div>
+<div class="bg-blob blob-blue"></div>
+<div class="bg-blob blob-purple"></div>
+<div id="star-field"></div>
+
+<main style="position:relative;z-index:10;max-width:500px;margin:0 auto;padding:72px 16px 300px">
+  <div id="skeleton">
+    <div style="display:flex;justify-content:center;margin-bottom:20px"><div class="skel" style="height:28px;width:160px;border-radius:99px"></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+      <div class="skel" style="height:150px;border-radius:1.6rem"></div>
+      <div class="skel" style="height:150px;border-radius:1.6rem"></div>
+    </div>
+    <div class="skel" style="height:32px;width:75%;border-radius:10px;margin:0 auto 10px"></div>
+    <div class="skel" style="height:14px;width:90%;border-radius:8px;margin:0 auto 6px"></div>
+    <div class="skel" style="height:14px;width:55%;border-radius:8px;margin:0 auto"></div>
+  </div>
+
+  <div id="main-content" style="opacity:0;transition:opacity .45s ease">
+    <div style="text-align:center;margin-bottom:20px" class="fu1">
+      <div class="hero-label"><span class="hero-label-dot"></span>M89 ပရိုမိုကုဒ်</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px" class="fu2">
+      <img id="img1-disp" src="" style="height:150px;width:100%;object-fit:cover;border-radius:1.6rem;background:rgba(255,255,255,.03);box-shadow:0 4px 24px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)">
+      <img id="img2-disp" src="" style="height:150px;width:100%;object-fit:cover;border-radius:1.6rem;background:rgba(255,255,255,.03);box-shadow:0 4px 24px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)">
+    </div>
+    <div style="text-align:center;margin-bottom:16px" class="fu3">
+      <h1 id="title-disp" class="hero-title" style="margin-bottom:10px"></h1>
+      <p id="sub-disp" class="hero-sub"></p>
+    </div>
+    <div class="stats-strip fu4">
+      <div class="stat-item"><div class="stat-val" id="live-views">—</div><div class="stat-key">👁 ကြည့်ရှုမှု</div></div>
+      <div class="stat-item"><div class="stat-val" id="live-gifts">—</div><div class="stat-key">🎁 ကုဒ်ရယူ</div></div>
+      <div class="stat-item"><div class="stat-val" id="live-players">—</div><div class="stat-key">🎮 ဆော့သူ</div></div>
+    </div>
+  </div>
+</main>
+
+<div class="fixed-btn-bar">
+  <div class="btn-stack">
+    <button class="lux-btn btn-gift" onclick="handleDraw()">
+      <div class="btn-glow"></div><div class="btn-sweep"></div>
+      <span class="btn-icon" style="font-size:22px">🎁</span>
+      <span class="btn-label btn-label-gift">GIFT CODE ရယူရန် နှိပ်ပါ !</span>
+    </button>
+    <button class="lux-btn btn-9w" onclick="openGame('g1')">
+      <div class="btn-glow"></div><div class="btn-sweep" style="animation-delay:.6s"></div>
+      <span class="btn-icon">🎰</span>
+      <span class="btn-label">9W ဂိမ်းကစားရန် နှိပ် !</span>
+    </button>
+    <button class="lux-btn btn-m799" onclick="openGame('g2')">
+      <div class="btn-glow"></div><div class="btn-sweep" style="animation-delay:1.2s"></div>
+      <span class="btn-icon">🎲</span>
+      <span class="btn-label">M799 ဂိမ်းကစားရန် နှိပ် !</span>
+    </button>
+    <button class="lux-btn btn-m89" onclick="openGame('g3')">
+      <div class="btn-glow"></div><div class="btn-sweep" style="animation-delay:1.8s"></div>
+      <span class="btn-icon">🎮</span>
+      <span class="btn-label">M89 ဂိမ်းကစားရန် နှိပ် !</span>
+      <span class="social-pill" id="social-proof">▲ live</span>
+    </button>
+  </div>
+</div>
+
+<div id="code-modal">
+  <div class="code-sheet">
+    <button class="code-close" onclick="closeCodeModal()">✕</button>
+    <div class="code-tag">မင်းရဲ့ ဘောနပ်ကုဒ် 🎁</div>
+    <div id="code-disp">-----</div>
+    <button class="copy-btn" onclick="copyCode()">ကော်ပီ ကူးယူပါ !<span id="copy-countdown"></span></button>
+    <p style="margin-top:12px;font-size:9px;opacity:.2;letter-spacing:.4em;text-transform:uppercase;font-weight:700">ဂိမ်းအကောင်ဝင်ပြီး အသုံးပြုပါ</p>
+  </div>
+</div>
+
+<div id="login-modal">
+  <div class="login-card">
+    <div style="font-size:30px;margin-bottom:8px">🌙</div>
+    <h3 style="font-size:18px;font-weight:900;text-transform:uppercase;margin-bottom:20px">Admin Access</h3>
+    <input type="password" id="pin-input" class="admin-input" style="text-align:center;font-size:22px;letter-spacing:.4em;font-family:monospace;margin-bottom:16px" placeholder="••••">
+    <div style="display:flex;gap:8px">
+      <button onclick="toggleLogin()" style="flex:1;padding:12px;background:#f0f3fa;border:none;border-radius:12px;font-weight:700;font-size:13px">Back</button>
+      <button onclick="checkLogin()" style="flex:1;padding:12px;background:#1a1a2e;color:white;border:none;border-radius:12px;font-weight:700;font-size:13px">Entry</button>
+    </div>
+  </div>
+</div>
+
+<div id="admin-dash">
+  <div class="admin-header">
+    <h1 style="font-size:18px;font-weight:900;font-style:italic;text-transform:uppercase">Control Panel</h1>
+    <button onclick="closeDash()" style="padding:8px 16px;background:white;border:1px solid #e4e8f0;border-radius:10px;font-weight:700;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)">CLOSE</button>
+  </div>
+  <div class="admin-body">
+    <div class="admin-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span class="admin-label" style="margin-bottom:0">📊 Live Analytics</span>
+        <button onclick="resetStats()" style="font-size:9px;padding:4px 10px;background:#fff0f0;color:#e04040;border:1px solid #ffd0d0;border-radius:8px;font-weight:700">RESET</button>
+      </div>
+      <div class="stats-grid">
+        <div class="s-card"><div class="s-num" id="s-views">—</div><div class="s-lbl">👁 Page Views</div></div>
+        <div class="s-card"><div class="s-num" id="s-gifts">—</div><div class="s-lbl">🎁 Gift Taps</div><div class="s-rate" id="s-gift-rate">—</div><div class="funnel-bar"><div class="funnel-fill" id="s-gift-bar" style="width:0%"></div></div></div>
+        <div class="s-card"><div class="s-num" id="s-g1">—</div><div class="s-lbl">🎰 9W Taps</div></div>
+        <div class="s-card"><div class="s-num" id="s-g2g3">—</div><div class="s-lbl">🎮 M799+M89</div></div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid #edf0f7">
+        <span class="admin-label">Social Proof Base Number</span>
+        <div style="display:flex;gap:8px">
+          <input id="in-dl-base" type="number" class="admin-input" placeholder="847" style="flex:1">
+          <button onclick="saveDlBase()" style="padding:0 14px;background:#1a1a2e;color:white;border:none;border-radius:12px;font-size:11px;font-weight:700">SAVE</button>
+        </div>
+      </div>
+    </div>
+    <div class="admin-card">
+      <span class="admin-label">Title & Subtitle</span>
+      <input id="in-title" type="text" class="admin-input" placeholder="Title" style="margin-bottom:8px">
+      <input id="in-color" type="color" style="width:100%;height:38px;border-radius:10px;border:1px solid #e4e8f0;cursor:pointer;margin-bottom:8px">
+      <textarea id="in-sub" class="admin-input" rows="2" placeholder="Subtitle (*bold*)"></textarea>
+    </div>
+    <div class="admin-card">
+      <span class="admin-label">Game Links</span>
+      <p style="font-size:11px;font-weight:600;color:#b85000;margin-bottom:4px">🎰 9W Link</p>
+      <input id="in-g1-link" type="text" class="admin-input" placeholder="https://..." style="margin-bottom:10px;font-family:monospace;font-size:12px">
+      <p style="font-size:11px;font-weight:600;color:#9c2ef0;margin-bottom:4px">🎲 M799 Link</p>
+      <input id="in-g2-link" type="text" class="admin-input" placeholder="https://..." style="margin-bottom:10px;font-family:monospace;font-size:12px">
+      <p style="font-size:11px;font-weight:600;color:#0070e0;margin-bottom:4px">🎮 M89 Link</p>
+      <input id="in-g3-link" type="text" class="admin-input" placeholder="https://..." style="font-family:monospace;font-size:12px">
+    </div>
+    <div class="admin-card">
+      <span class="admin-label">🔐 Admin Password (ပြောင်းရန်သာ)</span>
+      <input id="in-admin-pw" type="text" class="admin-input" placeholder="ပြောင်းချင်မှ ထည့်ပါ..." style="font-family:monospace">
+    </div>
+    <div class="admin-card">
+      <span class="admin-label">Banners (Auto-Compressed)</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><input type="file" accept="image/*" onchange="processImage(this,'pre1')" style="font-size:8px;width:100%;margin-bottom:6px"><img id="pre1" style="height:90px;width:100%;object-fit:cover;border-radius:10px;border:1px solid #e4e8f0;background:#f0f3fa"></div>
+        <div><input type="file" accept="image/*" onchange="processImage(this,'pre2')" style="font-size:8px;width:100%;margin-bottom:6px"><img id="pre2" style="height:90px;width:100%;object-fit:cover;border-radius:10px;border:1px solid #e4e8f0;background:#f0f3fa"></div>
+      </div>
+    </div>
+    <div class="admin-card">
+      <span class="admin-label">Gift Codes (One per line)</span>
+      <textarea id="in-codes" class="admin-input" rows="6" style="font-family:monospace;font-size:11px"></textarea>
+    </div>
+    <button onclick="saveToCloud()" id="save-btn" style="width:100%;padding:18px;background:#1a1a2e;color:white;border:none;border-radius:1.2rem;font-family:'Pyidaungsu',sans-serif;font-size:16px;font-weight:900;box-shadow:0 8px 28px rgba(0,0,0,.2);cursor:pointer;transition:transform .1s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform=''" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform=''">SAVE TO CLOUD</button>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import{getFirestore,doc,onSnapshot,setDoc,increment}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyDdoLASpM-r6i6iZOwwe1eE0fS4B4z6_n4",authDomain:"moonlight-xmaz-28e10.firebaseapp.com",projectId:"moonlight-xmaz-28e10",storageBucket:"moonlight-xmaz-28e10.firebasestorage.app",appId:"1:1042314863578:web:f2b20c89aa8b374f29d6e3"});
+const db=getFirestore(app),cfgRef=doc(db,"moonlight_pro","main_config"),statsRef=doc(db,"moonlight_pro","analytics");
+let appData={},statsData={},adminPw="2006",firstDone=false;
+
+// ---- UPDATE COUNTS : 4,158 VIEWS | 1,125 GIFTS | 3,459 PLAYERS (sum g1+g2+g3) ----
+const TARGET_VIEWS = 4158;
+const TARGET_GIFTS = 1125;
+const TARGET_PLAYERS = 3459;
+const PRESET_G1 = 1550;   // 9W
+const PRESET_G2 = 1100;   // M799
+const PRESET_G3 = 809;    // M89 → 1550+1100+809 = 3459
+
+// Trigger initial stats only once per browser (avoid overwriting real progress)
+if(!localStorage.getItem('m89_stats_preset_v2')) {
+  localStorage.setItem('m89_stats_preset_v2', '1');
+  // Set exact values into Firestore (pageViews needs -1 because first increment will happen later)
+  setDoc(statsRef, {
+    pageViews: TARGET_VIEWS - 1,    // will become TARGET_VIEWS after increment
+    giftTaps: TARGET_GIFTS,
+    g1Taps: PRESET_G1,
+    g2Taps: PRESET_G2,
+    g3Taps: PRESET_G3
+  }, { merge: true }).catch(e=>console.warn(e));
+}
+
+// track helper with increment, but pageview increment is called once after preset to avoid double
+const trackStats = (field) => setDoc(statsRef, {[field]: increment(1)}, {merge: true}).catch(()=>{});
+
+// pageview call with delay to make sure preset is applied first
+setTimeout(() => { trackStats('pageViews'); }, 800);
+
+onSnapshot(cfgRef,(snap)=>{
+  if(snap.exists()){appData=snap.data();adminPw=appData.adminPw||"2006";syncUI();}
+  else setDoc(cfgRef,{title:"Moonlight Xmas",titleColor:"#ffffff",sub:"ပျော်ရွှင်စရာ *Christmas* အခါသမယလေး ဖြစ်ပါစေ။",codes:["GIFT-CODE-2024"],codeIndex:0,img1:"https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=400",img2:"https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400",g1Link:"",g2Link:"",g3Link:"",adminPw:"2006",dlBase:847});
+});
+onSnapshot(statsRef,(snap)=>{if(snap.exists()){statsData=snap.data();syncStats();updateSocialProof();}});
+
+function syncUI(){
+  const t=document.getElementById('title-disp');t.innerText=appData.title||'';t.style.color=appData.titleColor||'#fff';
+  document.getElementById('sub-disp').innerHTML=(appData.sub||'').replace(/\*(.*?)\*/g,"<b>$1</b>");
+  document.getElementById('img1-disp').src=appData.img1||'';document.getElementById('img2-disp').src=appData.img2||'';
+  document.getElementById('in-title').value=appData.title||'';document.getElementById('in-color').value=appData.titleColor||'#ffffff';
+  document.getElementById('in-sub').value=appData.sub||'';document.getElementById('in-g1-link').value=appData.g1Link||'';
+  document.getElementById('in-g2-link').value=appData.g2Link||'';document.getElementById('in-g3-link').value=appData.g3Link||'';
+  document.getElementById('in-codes').value=(appData.codes||[]).join('\n');document.getElementById('in-dl-base').value=appData.dlBase||847;
+  document.getElementById('pre1').src=appData.img1||'';document.getElementById('pre2').src=appData.img2||'';
+  updateSocialProof();
+  if(!firstDone){firstDone=true;const s=document.getElementById('skeleton'),c=document.getElementById('main-content');s.style.opacity='0';s.style.transition='opacity .3s';setTimeout(()=>{s.style.display='none';if(!localStorage.getItem('m89_v')){localStorage.setItem('m89_v','1');c.style.animation='fade-up .55s cubic-bezier(0.34,1.4,0.64,1) both';}else{c.style.opacity='1';}},300);}
+}
+function syncStats(){
+  let v=statsData.pageViews||0;
+  let g=statsData.giftTaps||0;
+  let g1=statsData.g1Taps||0;
+  let g2=statsData.g2Taps||0;
+  let g3=statsData.g3Taps||0;
+  // ensure display shows minimum target if freshly preset (smooth)
+  if(v < TARGET_VIEWS && localStorage.getItem('m89_stats_preset_v2')==='1') v = Math.max(v, TARGET_VIEWS);
+  if(g < TARGET_GIFTS && localStorage.getItem('m89_stats_preset_v2')==='1') g = Math.max(g, TARGET_GIFTS);
+  let totalPlayers = g1+g2+g3;
+  if(totalPlayers < TARGET_PLAYERS && localStorage.getItem('m89_stats_preset_v2')==='1') totalPlayers = Math.max(totalPlayers, TARGET_PLAYERS);
+  
+  document.getElementById('s-views').innerText=v.toLocaleString();
+  document.getElementById('s-gifts').innerText=g.toLocaleString();
+  document.getElementById('s-g1').innerText=g1.toLocaleString();
+  document.getElementById('s-g2g3').innerText=(g2+g3).toLocaleString();
+  const gRate=v>0?((g/v)*100).toFixed(1):0;
+  const elRate=document.getElementById('s-gift-rate');
+  elRate.innerText=gRate+'% of views';
+  elRate.className='s-rate '+(gRate>=30?'rate-g':'rate-m');
+  document.getElementById('s-gift-bar').style.width=Math.min(gRate,100)+'%';
+  countUp('live-views', v);
+  countUp('live-gifts', g);
+  countUp('live-players', totalPlayers);
+}
+function updateSocialProof(){
+  const base=appData.dlBase||847;
+  const g3val=statsData.g3Taps||0;
+  const total=(base+g3val);
+  document.getElementById('social-proof').innerText='👥 '+total.toLocaleString()+'+';
+}
+window.handleDraw=async()=>{haptic(22);const codes=appData.codes||[];if(!codes.length)return;const idx=(appData.codeIndex??0)%codes.length;document.getElementById('code-disp').innerText=codes[idx];document.getElementById('code-modal').style.display='flex';trackStats('giftTaps');setDoc(cfgRef,{...appData,codeIndex:idx+1}).catch(()=>{});};
+window.openGame=(key)=>{haptic(15);const urls={g1:appData.g1Link,g2:appData.g2Link,g3:appData.g3Link};const url=urls[key];if(url?.trim()){trackStats(key+'Taps');window.open(url.trim(),'_blank');}else showToast("Link မသတ်မှတ်ရသေးပါ ⚙️");};
+window.checkLogin=()=>{if(document.getElementById('pin-input').value===adminPw){toggleLogin();document.getElementById('admin-dash').style.display='block';document.getElementById('pin-input').value='';}else{showToast("Password မှားနေပါတယ် ❌");document.getElementById('pin-input').value='';}};
+window.saveToCloud=async()=>{const btn=document.getElementById('save-btn');btn.innerText="UPDATING...";btn.disabled=true;try{const pw=document.getElementById('in-admin-pw').value.trim();await setDoc(cfgRef,{...appData,title:document.getElementById('in-title').value,titleColor:document.getElementById('in-color').value,sub:document.getElementById('in-sub').value,g1Link:document.getElementById('in-g1-link').value.trim(),g2Link:document.getElementById('in-g2-link').value.trim(),g3Link:document.getElementById('in-g3-link').value.trim(),codes:document.getElementById('in-codes').value.split('\n').filter(c=>c.trim()),codeIndex:0,dlBase:parseInt(document.getElementById('in-dl-base').value)||847,adminPw:pw||appData.adminPw||"2006",img1:document.getElementById('pre1').src,img2:document.getElementById('pre2').src});showToast("Cloud Synced! ✓");document.getElementById('in-admin-pw').value='';closeDash();}catch(e){alert("Error: "+e.message);}finally{btn.innerText="SAVE TO CLOUD";btn.disabled=false;}};
+window.saveDlBase=async()=>{const v=parseInt(document.getElementById('in-dl-base').value)||847;setDoc(cfgRef,{...appData,dlBase:v}).then(()=>showToast("Saved ✓")).catch(()=>{});};
+window.resetStats=async()=>{if(!confirm("Analytics reset မှာ သေချာပါသလား?"))return;setDoc(statsRef,{pageViews:0,giftTaps:0,g1Taps:0,g2Taps:0,g3Taps:0}).then(()=>showToast("Reset ✓")).catch(()=>{});};
+</script>
+
+<script>
+window.countUp=function(id,target){const el=document.getElementById(id);if(!el)return;const start=parseInt(el.innerText.replace(/,/g,''))||0;if(start===target)return;const steps=30;let i=0;const t=setInterval(()=>{i++;let val=Math.round(start+(target-start)*(i/steps));if(val<0)val=0;el.innerText=val.toLocaleString();if(i>=steps){el.innerText=target.toLocaleString();clearInterval(t);}},16);};
+window.haptic=(ms=10)=>{if(navigator.vibrate)navigator.vibrate(ms)};
+const ob=document.getElementById('offline-banner');
+const setOnline=()=>ob.classList.toggle('show',!navigator.onLine);
+window.addEventListener('online',setOnline);window.addEventListener('offline',setOnline);setOnline();
+window.processImage=(input,preId)=>{if(!input.files?.[0])return;const r=new FileReader();r.onload=(e)=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');let w=img.width,h=img.height,M=500;if(w>M){h*=M/w;w=M;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);document.getElementById(preId).src=c.toDataURL('image/jpeg',.5);};img.src=e.target.result;};r.readAsDataURL(input.files[0]);};
+function initUI(){const field=document.getElementById('star-field');for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+.6+'px';s.style.cssText=`width:${sz};height:${sz};background:${Math.random()>.7?'#ffea00':'#fff'};left:${Math.random()*100}vw;top:${Math.random()*100}vh;animation-duration:${Math.random()*30+18}s;opacity:${Math.random()*.6+.3}`;field.appendChild(s);}const box=document.getElementById('bulb-box');const cols=['#ff2020','#00e040','#0090ff','#ffcc00','#ff00cc'];for(let i=0;i<18;i++){const b=document.createElement('div');b.className='bulb';b.style.cssText=`background:${cols[i%cols.length]};color:${cols[i%cols.length]};animation-delay:${i*.13}s;margin-top:${Math.sin(i)*10+14}px`;box.appendChild(b);}}
+let _cdTimer=null;
+window.copyCode=()=>{haptic(12);const txt=document.getElementById('code-disp').innerText;const after=()=>{showToast("Copied! ✓");let s=5;const cd=document.getElementById('copy-countdown');cd.innerText=` (${s}s)`;clearInterval(_cdTimer);_cdTimer=setInterval(()=>{s--;if(s<=0){clearInterval(_cdTimer);cd.innerText='';closeCodeModal();}else cd.innerText=` (${s}s)`;},1000);};navigator.clipboard?.writeText(txt).then(after).catch(()=>{const el=document.createElement('textarea');el.value=txt;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);after();});};
+window.closeCodeModal=()=>{document.getElementById('code-modal').style.display='none';clearInterval(_cdTimer);document.getElementById('copy-countdown').innerText='';};
+window.showToast=(msg)=>{const t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600);};
+let _mc=0,_mt=null;
+window.moonTap=()=>{haptic(8);_mc++;clearTimeout(_mt);if(_mc>=3){_mc=0;haptic(40);const m=document.getElementById('moon');m.style.background='radial-gradient(circle at 35% 35%,#ffe066,#ffaa00)';m.style.boxShadow='0 0 0 1px rgba(255,200,0,.3),0 0 40px rgba(255,180,0,.6)';setTimeout(()=>{m.style.background='radial-gradient(circle at 35% 35%,#fff,#e8e0c0)';m.style.boxShadow='0 0 0 1px rgba(255,255,255,.15),0 0 30px rgba(255,255,220,.35)';toggleLogin();},350);}else _mt=setTimeout(()=>{_mc=0;},850);};
+window.toggleLogin=()=>{const m=document.getElementById('login-modal');const show=!m.classList.contains('show');m.classList.toggle('show',show);m.style.display=show?'flex':'none';};
+window.closeDash=()=>document.getElementById('admin-dash').style.display='none';
+window.onload=initUI;
+</script>
+</body>
+</html>
